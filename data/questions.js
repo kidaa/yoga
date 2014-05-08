@@ -17,7 +17,7 @@ var questionSets =
 		]
 	),
 	new QuestionSet(
-		"the convex/ concave principle states that proper technique in a bend is to...",
+		"the convex/concave principle states that proper technique in a bend is to...",
 		[
 			"lengthen the spine first, then bend. this prevents compression on the spine.",
 			"bend deeply, then straighten the spine. this deepens the concavity.",
