@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Try it!</title>
+	<script src="data/questions.js"></script>
+	<script>
+/*
+function QuestionSet (question, answers) {
+    this.question = question,
+    this.answers = answers
+};
+
+var questionSets =
+[
+    new QuestionSet(
+        "The pelvic floor corresponds with which energy center?",
+        [
+            "mula bandha",
+            "pada bandha",
+            "sukha bandha",
+            "uddiyana bandha"
+        ]
+    )
+];*/
+		window.onload = function() {
+			question = document.getElementById("question");
+			ans1 = document.getElementById("ans1");
+			ans2 = document.getElementById("ans2");
+			ans3 = document.getElementById("ans3");
+			ans4 = document.getElementById("ans4");
+			
+			var rand = Math.floor(Math.random() * questionSets.length); 
+			currentSet = questionSets[rand];
+			question.innerHTML = currentSet.question;
+			ans1.innerHTML =	 currentSet.answers[0];
+			ans2.innerHTML =	 currentSet.answers[1];
+			ans3.innerHTML =	 currentSet.answers[2];
+			ans4.innerHTML =	 currentSet.answers[3];
+		};
+	</script>
+</head>
+<body>
+	<h1 id="question"></h1>
+	<p id="ans1"></p>
+	<p id="ans2"></p>
+	<p id="ans3"></p>
+	<p id="ans4"></p>
+
+</body>
+</html>
+
