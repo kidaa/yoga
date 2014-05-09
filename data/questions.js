@@ -71,7 +71,7 @@ var questionSets =
 		]
 	),
 	new QuestionSet(
-		"which muscle is responisble for abducting the hip joint?",
+		"which muscle is responsible for abducting the hip joint?",
 		[
 			"gluteus medius",
 			"abductor magnus",
