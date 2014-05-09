@@ -53,29 +53,20 @@
 				setAnswerContent (ans);
 			};
 
-			// returns a randomly selected set of question sets
-			function getQuizSet (numSets, questionSets) {
-				var quizSet = [];
-				var setNum = 0;
-
-				for (var i = 0; i < numSets; i++) {
-					do {
-						setNum = Math.floor(Math.random() * questionSets.length);
-					} while (!$.inArray(questionSets[setNum], quizSet));
-
-					quizSet[i] = questionSets[setNum];
-				}
-
-				return quizSet;
-			};
-
 			window.onload = function () {
-				var quizSet = getQuizSet (5, questionSets);
-				var currentSet = quizSet[0];
+				var quizSet = shuffledRandomSubArray(questionSets, 10);
+				var count = 0;
+				var currentSet = quizSet[count];
 				var answerElements = getAnswerElements ();
 				var questionElement = document.getElementById("question");
+				var clickme = document.getElementById("clickme");
 
 				loadSet(currentSet, questionElement, answerElements);
+				clickme.onclick = function () {
+					count++;
+					var currentSet = quizSet[count];
+					loadSet(currentSet, questionElement, answerElements);
+				};
 			};
 		</script>
 		
@@ -83,6 +74,9 @@
 	</head>
 	<body>
 		<div class="container">
+			<div class="row">
+				<div class="well"><button type="button" id="clickme">Click Me</button></div>
+			</div>
 			<div class="row">
 				<div class="well"><h1 id="question"></h1></div>
 			</div>
