@@ -24,23 +24,59 @@
 			<script src="js/html5shiv.js"></script>
 			<script src="js/respond.min.js"></script>
 		<![endif]-->
-	    <script src="data/questions.js"></script>
+		<script src="data/questions.js"></script>
+
+		<!-- shuffle() function shuffles an array -->
+		<script src="js/qimport.js"></script>
 		<script>
-        	window.onload = function() {
-        	    question = document.getElementById("question");
-        	    ans1 = document.getElementById("ans1");
-        	    ans2 = document.getElementById("ans2");
-        	    ans3 = document.getElementById("ans3");
-        	    ans4 = document.getElementById("ans4");
-        	    
-        	    var rand = Math.floor(Math.random() * questionSets.length); 
-        	    currentSet = questionSets[rand];
-        	    question.innerHTML = currentSet.question;
-        	    ans1.innerHTML =     currentSet.answers[0];
-        	    ans2.innerHTML =     currentSet.answers[1];
-        	    ans3.innerHTML =     currentSet.answers[2];
-        	    ans4.innerHTML =     currentSet.answers[3];
-        	};
+			// gets four "answer" divs from document by id
+			function getAnswerElements () {
+				var ans = [];
+				for (var i = 0; i < 4; i++) {
+					ans[i] = document.getElementById("ans" + i);
+				}
+				return ans;
+			};
+
+			// sets answer div contents to those in ans array
+			function setAnswerContent (ans) {
+				for (var i = 0; i < 4; i++) {
+					ans[i].innerHTML = shuffledAnswers[i];
+				}
+			};
+			
+			// loads question set content into template
+			function loadSet (currentSet, question, ans) {
+				shuffledAnswers = shuffle(currentSet.answers);
+				question.innerHTML = currentSet.question;
+				
+				setAnswerContent (ans);
+			};
+
+			// returns a randomly selected set of question sets
+			function getQuizSet (numSets, questionSets) {
+				var quizSet = [];
+				var setNum = 0;
+
+				for (var i = 0; i < numSets; i++) {
+					do {
+						setNum = Math.floor(Math.random() * questionSets.length);
+					} while (!$.inArray(questionSets[setNum], quizSet));
+
+					quizSet[i] = questionSets[setNum];
+				}
+
+				return quizSet;
+			};
+
+			window.onload = function () {
+				var quizSet = getQuizSet (5, questionSets);
+				var currentSet = quizSet[0];
+				var answerElements = getAnswerElements ();
+				var questionElement = document.getElementById("question");
+
+				loadSet(currentSet, questionElement, answerElements);
+			};
 		</script>
 		
 
@@ -51,13 +87,12 @@
 				<div class="well"><h1 id="question"></h1></div>
 			</div>
 			<div class="row">
+				<div class="col-sm-6"><div class="well" id="ans0"></div></div>
 				<div class="col-sm-6"><div class="well" id="ans1"></div></div>
-				<div class="col-sm-6"><div class="well" id="ans2"></div></div>
 				<div class="clearfix"></div>
+				<div class="col-sm-6"><div class="well" id="ans2"></div></div>
 				<div class="col-sm-6"><div class="well" id="ans3"></div></div>
-				<div class="col-sm-6"><div class="well" id="ans4"></div></div>
 			</div>
 		</div>
 	</body>
 </html>
-
