@@ -28,7 +28,7 @@ var questionSets =
 	new QuestionSet(
 		"what is the motion of the lumbar spine during psoas contraction?",
 		[
-			"moves posterior, flettening the natural lumbar curve",
+			"moves posterior, flattening the natural lumbar curve",
 			"moves anterior, increasing the natural lumbar curve",
 			"moves posterior, deepening the natural lumbar curve",
 			"moves anterior, flattening the natural lbar   curve."
