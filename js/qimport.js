@@ -24,3 +24,34 @@ function shuffledRandomSubArray (theArray, subArraySize) {
 
 	return subArray;
 };
+
+// gets four "answer" divs from document by id
+function getAnswerElements () {
+	var ans = [];
+	for (var i = 0; i < 4; i++) {
+		ans[i] = document.getElementById("ans" + i);
+	}
+	return ans;
+};
+
+// sets answer div contents to those in ans array
+function setAnswerContent (ans) {
+	for (var i = 0; i < 4; i++) {
+		ans[i].innerHTML = shuffledAnswers[i];
+	}
+};
+
+// loads question set content into template
+function loadSet (currentSet, question, ans) {
+	shuffledAnswers = shuffle(currentSet.answers);
+	question.innerHTML = currentSet.question;
+	
+	setAnswerContent (ans);
+};
+
+// sets background color when element clicked
+function backgroundColorEvent (element, color) {
+	element.onclick = function () {
+		element.style.backgroundColor = color;
+	};
+};
