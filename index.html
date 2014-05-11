@@ -29,42 +29,95 @@
 		<script src="js/questions.js"></script>
 
 		<script>
-			var quizSet = shuffledRandomSubArray(questionSets, 10);
+			var QUIZ_LENGTH	= 5;
+			var quizSet = shuffledRandomSubArray(questionSets, QUIZ_LENGTH);
 			var count = 0;
 			var responses = [];
-			var answerClicked; // stores info about 
+			var answerElementChosen; // stores answer element clicked
 		
 			window.onload = function () {
 				var answerElements = getAnswerElements ();
 				var questionElement = document.getElementById("question");
-				var clickme = document.getElementById("clickme");
+				var advanceScreen = document.getElementById("advanceScreen");
 
 				// begins the quiz
 				loadSet(quizSet[count], questionElement, answerElements);
 
-				clickme.onclick = function () {
-					responses[count] = new SelectedAnswer(questionElement.innerHTML, answerElements[0].innerHTML);
-					loadSet (quizSet[++count], questionElement, answerElements);
+				function handleAnswerClick (answerElementClicked) {
+					answerElementClicked.onclick = function () {
+						answerElementChosen = answerElementClicked;
+						responses[count] = new SelectedAnswer(questionElement.innerHTML, answerElementClicked.innerHTML);
+						if (count == (QUIZ_LENGTH - 1))
+							document.getElementById("advanceScreen").innerHTML = "See Summary";
+						$('#showAnswer').show();
+						$('#advanceScreen').show();
+					};
+				};
+
+				// handle next question click event
+				advanceScreen.onclick = function () {
+					if (count < (QUIZ_LENGTH - 1)) {
+						resetAnswerColors ();
+						loadSet (quizSet[++count], questionElement, answerElements);
+						$('#showAnswer').hide();
+						$('#correctAnswer').hide();
+						$('#advanceScreen').hide();
+						counterElement = document.getElementById("counter");
+						counterElement.innerHTML = count + 1;
+					}
+				};
+				
+				for (var i = 0; i < answerElements.length; i++) {
+					handleAnswerClick (answerElements[i]);
+				}
+				
+				// show answers and color green if they match, red if not
+				var showAnswer = document.getElementById ("showAnswer");
+				showAnswer.onclick = function () {
+					if ( quizSet[count].answers[0] == responses[count].answer ) {
+						correctAnswer.style.backgroundColor = CORRECT_COLOR;
+						answerElementChosen.style.backgroundColor = CORRECT_COLOR;
+					} else {
+						correctAnswer.style.backgroundColor = INCORRECT_COLOR;
+						answerElementChosen.style.backgroundColor = INCORRECT_COLOR;
+					}
+					$('#correctAnswer').show();
+
 				};
 			};
 		</script>
-		
+		<style>
+			#showAnswer { display: none }
+			#correctAnswer { display: none }
+			#advanceScreen { display: none; background-color: #82CAFA }
+		</style>
 
 	</head>
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="well"><button type="button" id="clickme">Click Me</button></div>
-			</div>
-			<div class="row">
 				<div class="well"><h1 id="question"></h1></div>
 			</div>
 			<div class="row">
-				<div class="col-xs-6"><div class="well" id="ans0"></div></div>
-				<div class="col-xs-6"><div class="well" id="ans1"></div></div>
+				<div class="col-xs-6"><div class="well ansColor" id="ans0"></div></div>
+				<div class="col-xs-6"><div class="well ansColor" id="ans1"></div></div>
 				<div class="clearfix"></div>
-				<div class="col-xs-6"><div class="well" id="ans2"></div></div>
-				<div class="col-xs-6"><div class="well" id="ans3"></div></div>
+				<div class="col-xs-6"><div class="well ansColor" id="ans2"></div></div>
+				<div class="col-xs-6"><div class="well ansColor" id="ans3"></div></div>
+			</div>
+			<div class="row">
+				<div class="well ansColor" id="correctAnswer"></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="well" id="showAnswer">Show Answer</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="well" id="counter">1</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="well" id="advanceScreen">Next Question</div>
+				</div>
 			</div>
 		</div>
 	</body>
