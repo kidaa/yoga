@@ -29,7 +29,7 @@ function shuffle(theArray){ //v1.0
 };
 
 // returns a shuffled subarray of subArraySize members from theArray
-function shuffledRandomSu Minimal cosmetic wear. Noticable scuffs and dents on the sides of the item. Please see photos for specifics. Comes with batteries, everything in pictures and original box. Feel free to shoot me an email with any questions. bArray (theArray, subArraySize) {
+function shuffledRandomSubArray (theArray, subArraySize) {
 	if (subArraySize > theArray.length)
 		return null;
 
@@ -81,7 +81,3 @@ function loadSet (currentSet, questionElement, answerElements) {
 	questionElement.innerHTML = currentSet.question;
 	setAnswerContent (answerElements, shuffledAnswers);
 };
-/*
-$(".answerEl").click (function () {
-	$(this).css("color", SELECTED_COLOR);
-});
