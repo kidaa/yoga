@@ -25,6 +25,40 @@
 		<!-- shuffle() function shuffles an array -->
 		<!-- qimport.js defines general functionality for this app -->
 		<!-- questions.js defines a group of question sets to be used in this app -->
+		<style>
+			#showAnswer { display: none }
+			#correctAnswer { display: none }
+			#advanceScreen { display: none; background-color: #82CAFA }
+		</style>
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="well"><h1 id="question"></h1></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans0"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans1"></div></div>
+				<div class="clearfix"></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans2"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans3"></div></div>
+			</div>
+			<div class="row">
+				<div class="well ansColor" id="correctAnswer"></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="well" id="showAnswer">Show Answer</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="well" id="counter">1</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="well" id="advanceScreen">Next Question</div>
+				</div>
+			</div>
+		</div>
 		<script src="js/qimport.js"></script>
 		<script src="js/questions.js"></script>
 
@@ -86,39 +120,5 @@
 				};
 			};
 		</script>
-		<style>
-			#showAnswer { display: none }
-			#correctAnswer { display: none }
-			#advanceScreen { display: none; background-color: #82CAFA }
-		</style>
-
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="well"><h1 id="question"></h1></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6"><div class="well ansColor" id="ans0"></div></div>
-				<div class="col-xs-6"><div class="well ansColor" id="ans1"></div></div>
-				<div class="clearfix"></div>
-				<div class="col-xs-6"><div class="well ansColor" id="ans2"></div></div>
-				<div class="col-xs-6"><div class="well ansColor" id="ans3"></div></div>
-			</div>
-			<div class="row">
-				<div class="well ansColor" id="correctAnswer"></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-4">
-					<div class="well" id="showAnswer">Show Answer</div>
-				</div>
-				<div class="col-xs-4">
-					<div class="well" id="counter">1</div>
-				</div>
-				<div class="col-xs-4">
-					<div class="well" id="advanceScreen">Next Question</div>
-				</div>
-			</div>
-		</div>
 	</body>
 </html>

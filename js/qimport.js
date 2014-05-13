@@ -1,5 +1,6 @@
 var CORRECT_COLOR = "green";
 var INCORRECT_COLOR = "red";
+var SELECTED_COLOR = "yellow";
 var DESELECTED_COLOR = "#f5f5f5";
 
 // answers is an array of answers
@@ -28,7 +29,7 @@ function shuffle(theArray){ //v1.0
 };
 
 // returns a shuffled subarray of subArraySize members from theArray
-function shuffledRandomSubArray (theArray, subArraySize) {
+function shuffledRandomSu Minimal cosmetic wear. Noticable scuffs and dents on the sides of the item. Please see photos for specifics. Comes with batteries, everything in pictures and original box. Feel free to shoot me an email with any questions. bArray (theArray, subArraySize) {
 	if (subArraySize > theArray.length)
 		return null;
 
@@ -80,3 +81,7 @@ function loadSet (currentSet, questionElement, answerElements) {
 	questionElement.innerHTML = currentSet.question;
 	setAnswerContent (answerElements, shuffledAnswers);
 };
+/*
+$(".answerEl").click (function () {
+	$(this).css("color", SELECTED_COLOR);
+});
