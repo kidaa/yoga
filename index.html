@@ -25,24 +25,29 @@
 		<!-- shuffle() function shuffles an array -->
 		<!-- qimport.js defines general functionality for this app -->
 		<!-- questions.js defines a group of question sets to be used in this app -->
-		<style>
-			#showAnswer { display: none }
-			#correctAnswer { display: none }
-			#advanceScreen { display: none; background-color: #82CAFA }
-		</style>
 
 	</head>
 	<body>
-		<div class="container">
+		<div class="container bookend" id="menu">
+			<div class="row">
+				<img>
+			</div>
+			<div class="row">
+				<div class="well col-md-6 col-sm-12" id="startButton">Start Quiz</div>
+				<div class="well col-md-6 col-sm-12" id="aboutButton">About</div>
+			</div>
+		</div>
+		<!-- end Menu -->
+		<div class="container" id="quiz">
 			<div class="row">
 				<div class="well"><h1 id="question"></h1></div>
 			</div>
 			<div class="row">
-				<div class="col-xs-6"><div class="well ansColor" id="ans0"></div></div>
-				<div class="col-xs-6"><div class="well ansColor" id="ans1"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans0"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans1"></div></div>
 				<div class="clearfix"></div>
-				<div class="col-xs-6"><div class="well ansColor" id="ans2"></div></div>
-				<div class="col-xs-6"><div class="well ansColor" id="ans3"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans2"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans3"></div></div>
 			</div>
 			<div class="row">
 				<div class="well ansColor" id="correctAnswer"></div>
@@ -59,21 +64,82 @@
 				</div>
 			</div>
 		</div>
+		<!-- end Quiz section -->
+		<div class="container bookend" id="summary">
+			<div class="container" id="summHead">
+				<div class="row">
+					<div class="well col-lg-12"><h1>Summary</h1></div>
+				</div>
+			<div class="container" id="summMenu">
+				<div class="row">
+					<div class="well col-xs-6" id="again">Try Again</div>
+					<div class="well col-xs-6" id="toMenu">Main Menu</div>
+				</div>
+			</div>
+			<div class="container" id="summKey">
+				<div class="row">
+					<div class="well col-xs-4"><b>Question</b></div>
+					<div class="well col-xs-4"><b>Correct Answer</b></div>
+					<div class="well col-xs-4"><b>Response</b></div>
+				</div>
+			</div>
+			<div class="container" id="summBody"></div>
+		</div>
+		<!-- end Summary section -->
 		<script src="js/qimport.js"></script>
 		<script src="js/questions.js"></script>
 
 		<script>
-			var QUIZ_LENGTH	= 5;
-			var quizSet = shuffledRandomSubArray(questionSets, QUIZ_LENGTH);
 			var count = 0;
-			var responses = [];
 			var answerElementChosen; // stores answer element clicked
-		
+			var QUIZ_LENGTH	= 1;
+			var quizSet = shuffledRandomSubArray(questionSets, QUIZ_LENGTH);
+			var responses = [];
+			
+				function buildSummary () {
+					var summQuestion;
+					var summCorrect;
+					var summResponse;
+					var summElement;
+					var rowStart = "<div class='row'>";
+					var rowEnd = "</div>";
+
+					for (var i = 0; i < QUIZ_LENGTH; i++) {
+						summQuestion = document.createElement("div");
+						summQuestion.className = "well col-xs-4 summItem summQuest";
+						summQuestion.innerHTML = responses[i].question;
+						
+						summCorrect = document.createElement("div");
+						summCorrect.className = "well col-xs-4 summItem summCorr";
+						summCorrect.innerHTML = quizSet[i].answers[0];
+						
+						summResponse = document.createElement("div");
+						summResponse.className = "well col-xs-4 summItem summResp";
+						summResponse.innerHTML = responses[i].answer;
+
+						if (quizSet[i].checkAnswer(responses[i].answer)) {
+							summResponse.style.backgroundColor = CORRECT_COLOR;
+						} else {
+							summResponse.style.backgroundColor = INCORRECT_COLOR;
+						}
+						
+						document.getElementById("summBody").appendChild(summQuestion);
+						document.getElementById("summBody").appendChild(summCorrect);
+						document.getElementById("summBody").appendChild(summResponse);
+					}
+				};
+
+				function toSummary () {
+					buildSummary ();
+					$('#quiz').slideUp("slow");
+					$('#summary').show("fast");
+				};
+				
 			window.onload = function () {
 				var answerElements = getAnswerElements ();
 				var questionElement = document.getElementById("question");
 				var advanceScreen = document.getElementById("advanceScreen");
-
+			
 				// begins the quiz
 				loadSet(quizSet[count], questionElement, answerElements);
 
@@ -91,13 +157,15 @@
 				// handle next question click event
 				advanceScreen.onclick = function () {
 					if (count < (QUIZ_LENGTH - 1)) {
-						resetAnswerColors ();
+						$(".ansColor").css("background", DESELECTED_COLOR);
 						loadSet (quizSet[++count], questionElement, answerElements);
 						$('#showAnswer').hide();
 						$('#correctAnswer').hide();
 						$('#advanceScreen').hide();
 						counterElement = document.getElementById("counter");
 						counterElement.innerHTML = count + 1;
+					} else {
+						toSummary ();
 					}
 				};
 				

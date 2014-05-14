@@ -7,20 +7,20 @@ var DESELECTED_COLOR = "#f5f5f5";
 // answer[0] is always the correct answer
 function QuestionSet (question, answers) {
 	this.question = question,
-	this.answers = answers
+	this.answers = answers,
+	this.checkAnswer = function (answerGiven) {
+		if (answerGiven == this.answers[0])
+			return true;
+		else
+			return false;
+	}
 };
 
 function SelectedAnswer (question, answer) {
 	this.question = question,
 	this.answer = answer
 };
-/*
-function handleAnswerClick (count, questionSet, answerElementClicked) {
-	answerElementClicked.onlick = function () {
-		responses[count] = new SelectedAnswer (questionSet.question, answerElementClicked.innerHTML);
-	};
-};
-*/
+
 // returns a shuffled version of the array in what is probably the ugliest code I've ever seen!
 function shuffle(theArray){ //v1.0
 	var o = theArray.slice (0);
@@ -66,10 +66,7 @@ function setAnswerContent (answerElements, answerContents) {
 };
 
 function resetAnswerColors () {
-	var ansColor = document.getElementsByClassName("ansColor");
-	for (var i = 0; i < ansColor.length; i++) {
-		ansColor[i].style.backgroundColor = DESELECTED_COLOR;
-	}
+	$(".ansColor").css("background", DESELECTED_COLOR);
 };
 
 // loads question set content into template
@@ -81,3 +78,17 @@ function loadSet (currentSet, questionElement, answerElements) {
 	questionElement.innerHTML = currentSet.question;
 	setAnswerContent (answerElements, shuffledAnswers);
 };
+
+$(".answerEl").click( function () {
+	$(".answerEl").css("background", DESELECTED_COLOR);
+	$(this).css("background", SELECTED_COLOR);
+});
+
+function startQuiz () {
+	$('.bookend').hide("slow");
+	$('#quiz').fadeIn("fast");
+};
+
+$('#startButton').click (function () {
+	startQuiz ();
+});
