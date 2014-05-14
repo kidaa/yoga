@@ -92,7 +92,7 @@
 		<script>
 			var count = 0;
 			var answerElementChosen; // stores answer element clicked
-			var QUIZ_LENGTH	= 1;
+			var QUIZ_LENGTH	= 5;
 			var quizSet = shuffledRandomSubArray(questionSets, QUIZ_LENGTH);
 			var responses = [];
 			
@@ -100,11 +100,16 @@
 					var summQuestion;
 					var summCorrect;
 					var summResponse;
+					var summRow;
 					var summElement;
+					var summBody = document.getElementById("summBody");
 					var rowStart = "<div class='row'>";
 					var rowEnd = "</div>";
 
 					for (var i = 0; i < QUIZ_LENGTH; i++) {
+						summRow = document.createElement("div");
+						summRow.className = "row";
+
 						summQuestion = document.createElement("div");
 						summQuestion.className = "well col-xs-4 summItem summQuest";
 						summQuestion.innerHTML = responses[i].question;
@@ -123,9 +128,10 @@
 							summResponse.style.backgroundColor = INCORRECT_COLOR;
 						}
 						
-						document.getElementById("summBody").appendChild(summQuestion);
-						document.getElementById("summBody").appendChild(summCorrect);
-						document.getElementById("summBody").appendChild(summResponse);
+						summBody.appendChild(summRow);
+						summRow.appendChild(summQuestion);
+						summRow.appendChild(summCorrect);
+						summRow.appendChild(summResponse);
 					}
 				};
 
