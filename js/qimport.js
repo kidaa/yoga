@@ -84,11 +84,21 @@ $(".answerEl").click( function () {
 	$(this).css("background", SELECTED_COLOR);
 });
 
+$("#toMenu").click( function () {
+	$(".container").hide();
+	$("#menu").show("slow");
+});
+
 function startQuiz () {
-	$('.bookend').hide("slow");
+	count = 0;
+	$('.bookend').hide();
 	$('#quiz').fadeIn("fast");
 };
 
 $('#startButton').click (function () {
+	startQuiz ();
+});
+
+$("#again").click (function () {
 	startQuiz ();
 });

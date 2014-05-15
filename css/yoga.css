@@ -1,3 +1,15 @@
+body {
+	font-size: 16px;
+}
+
+.well {
+	padding: 0.5em;
+}
+
+h1 {
+	font-size: 150%;
+}
+
 #showAnswer {
 	display: none;
 }
