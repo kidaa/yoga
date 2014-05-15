@@ -76,14 +76,13 @@
 					<div class="well col-xs-6" id="toMenu">Main Menu</div>
 				</div>
 			</div>
-			<div class="container" id="summKey">
+			<div class="container" id="summView">
 				<div class="row">
 					<div class="well col-xs-4"><b>Question</b></div>
 					<div class="well col-xs-4"><b>Correct Answer</b></div>
 					<div class="well col-xs-4"><b>Response</b></div>
 				</div>
 			</div>
-			<div class="container" id="summBody"></div>
 		</div>
 		<!-- end Summary section -->
 		<script src="js/qimport.js"></script>
@@ -91,10 +90,15 @@
 
 		<script>
 			var questionNumber; // don't initialize until quiz begins
-			var QUIZ_LENGTH = 5; // eventually make config UI for this
+			var QUIZ_LENGTH = 1; // eventually make config UI for this
 			var LAST_QUESTION = QUIZ_LENGTH - 1;
 			var quizSets = [];
 			var responses = [];
+
+			function mainMenu () {
+				$("#quiz, #summary").hide ();
+				$("#menu").show ();
+			};
 			
 			// initialize the quiz by getting new values for the quiz set, shuffling the answers,
 			// then displaying them along with the question
@@ -102,11 +106,15 @@
 				questionNumber = 0;
 				quizSets = shuffledRandomSubArray (questionSets, QUIZ_LENGTH);
 				displayQuestionSet ();
+				$(".bookend").hide ();
+				$("#quiz").show ();
 			};
 
 			function displayQuestionSet () {
 				$("#question").html(quizSets[questionNumber].question);
 				$("#correctAnswer").html(quizSets[questionNumber].answers[0]);
+				$("#counter").html(questionNumber + 1);
+				$(".ansColor").css("background", DESELECTED_COLOR);
 				shuffledAnswers = shuffle (quizSets[questionNumber].answers);
 				for (var i = 0; i < shuffledAnswers.length; i++) {
 					$(".answerEl").eq(i).html(shuffledAnswers[i]);
@@ -116,11 +124,46 @@
 			// advances question set to next in quizSets array
 			function nextQuestionSet () { questionNumber++; };
 
+			function displaySummary () {
+				$(".summElement").remove ();
+				var row; // q for question, key for correct answer, r for response
+				var summView = document.getElementById("summView");
+				// todo: populate summary contents (question, answer, response)
+				for (var i = 0; (i < quizSets.length) && (i < responses.length); i++) {
+
+					row = getSummaryRow (quizSets[i].question,
+										quizSets[i].answers[0],
+										responses[i]);
+
+					summView.appendChild (row);
+				}
+				
+				$("#quiz, #menu").hide ();
+				$("#summary").show ();
+			};
+			
+			// preformatted summary element (question, key, or response)
+			function getSummaryElement (htmlContent) {
+					var summaryElement = document.createElement("div");
+					summaryElement.className = "col-xs-4 well summElement";
+					summaryElement.innerHTML = htmlContent;
+					return summaryElement;
+			};
+
+			function getSummaryRow (qContent, keyContent, rContent) {
+					var row = document.createElement("div");
+					row.className = "row summRow";
+					
+					row.appendChild (getSummaryElement (qContent));
+					row.appendChild (getSummaryElement (keyContent));
+					row.appendChild (getSummaryElement (rContent));
+
+					return row;
+			};
+
 			$(document).ready ( function () {
 				// initialize a quiz
 				$("#startButton").click ( function () {
-					$("#menu").hide ();
-					$("#quiz").show ();
 					loadQuiz ();
 				});
 
@@ -147,13 +190,27 @@
 				$("#advanceScreen").click ( function () {
 					// if more questions
 					if (questionNumber < LAST_QUESTION) {
-						nextQuestion (); // todo: write this method or use a predefined one
+						nextQuestionSet (); // go to next question set
+						displayQuestionSet ();
 					} else {
-						// load summary
-						// **i.e. hide this view and display summary div
+						// otherwise the quiz has ended
+						// hide this view and display summary div
+						displaySummary ();
 					}
+					$("#advanceScreen, #showAnswer").hide ();
 				});
-			});		
+
+				// bind "Try Again" button to load quiz
+				$("#again").click ( function () {
+					loadQuiz ();
+				});
+				
+				// bind "Main Menu" button to, guess what, go back to the main menu
+				$("#toMenu").click ( function () {
+					mainMenu ();
+				});
+
+			});
 		</script>
 	</body>
 </html>

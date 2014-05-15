@@ -59,3 +59,7 @@ function setAnswerContent (answerElements, answerContents) {
 function resetAnswerColors () {
 	$(".ansColor").css("background", DESELECTED_COLOR);
 };
+
+function showMyAnswer () {
+	alert ("Your answer\n" + responses[questionNumber]);
+};
