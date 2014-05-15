@@ -16,9 +16,9 @@ function QuestionSet (question, answers) {
 	}
 };
 
-function SelectedAnswer (question, answer) {
-	this.question = question,
-	this.answer = answer
+// stores an answer selected. intended to be used in an array and indexed alongside the quizSet being used
+function Response (answerSelected) {
+	this.answerSelected = answerSelected
 };
 
 // returns a shuffled version of the array in what is probably the ugliest code I've ever seen!
@@ -49,16 +49,7 @@ function shuffledRandomSubArray (theArray, subArraySize) {
 	return subArray;
 };
 
-// gets four "answer" divs from document by id
-function getAnswerElements () {
-	var ans = [];
-	for (var i = 0; i < 4; i++) {
-		ans[i] = document.getElementById("ans" + i);
-	}
-	return ans;
-};
-
-// sets answer div contents to those in ans array
+// sets answer div contents to answers in contents array
 function setAnswerContent (answerElements, answerContents) {
 	for (var i = 0; i < 4; i++) {
 		answerElements[i].innerHTML = answerContents[i];
@@ -68,27 +59,3 @@ function setAnswerContent (answerElements, answerContents) {
 function resetAnswerColors () {
 	$(".ansColor").css("background", DESELECTED_COLOR);
 };
-
-// loads question set content into template
-function loadSet (currentSet, questionElement, answerElements) {
-	if (typeof currentSet == 'undefined')
-		return;
-	document.getElementById("correctAnswer").innerHTML = currentSet.answers[0];
-	shuffledAnswers = shuffle(currentSet.answers);
-	questionElement.innerHTML = currentSet.question;
-	setAnswerContent (answerElements, shuffledAnswers);
-};
-
-$(".answerEl").click( function () {
-	$(".answerEl").css("background", DESELECTED_COLOR);
-	$(this).css("background", SELECTED_COLOR);
-});
-
-function startQuiz () {
-	$('.bookend').hide("slow");
-	$('#quiz').fadeIn("fast");
-};
-
-$('#startButton').click (function () {
-	startQuiz ();
-});

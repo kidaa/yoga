@@ -90,114 +90,70 @@
 		<script src="js/questions.js"></script>
 
 		<script>
-			var count = 0;
-			var answerElementChosen; // stores answer element clicked
-			var QUIZ_LENGTH	= 1;
-			var QUIZ_LENGTH	= 5;
-			var quizSet = shuffledRandomSubArray(questionSets, QUIZ_LENGTH);
+			var questionNumber; // don't initialize until quiz begins
+			var QUIZ_LENGTH = 5; // eventually make config UI for this
+			var LAST_QUESTION = QUIZ_LENGTH - 1;
+			var quizSets = [];
 			var responses = [];
 			
-				function buildSummary () {
-					var summQuestion;
-					var summCorrect;
-					var summResponse;
-					var summElement;
-					var summRow;
-					var summElement;
-					var summBody = document.getElementById("summBody");
-					var rowStart = "<div class='row'>";
-					var rowEnd = "</div>";
-
-					for (var i = 0; i < QUIZ_LENGTH; i++) {
-						summRow = document.createElement("div");
-						summRow.className = "row";
-
-						summQuestion = document.createElement("div");
-						summQuestion.className = "well col-xs-4 summItem summQuest";
-						summQuestion.innerHTML = responses[i].question;
-						
-						summCorrect = document.createElement("div");
-						summCorrect.className = "well col-xs-4 summItem summCorr";
-						summCorrect.innerHTML = quizSet[i].answers[0];
-						
-						summResponse = document.createElement("div");
-						summResponse.className = "well col-xs-4 summItem summResp";
-						summResponse.innerHTML = responses[i].answer;
-
-						if (quizSet[i].checkAnswer(responses[i].answer)) {
-							summResponse.style.backgroundColor = CORRECT_COLOR;
-						} else {
-							summResponse.style.backgroundColor = INCORRECT_COLOR;
-						}
-						
-						document.getElementById("summBody").appendChild(summQuestion);
-						document.getElementById("summBody").appendChild(summCorrect);
-						document.getElementById("summBody").appendChild(summResponse);
-						summBody.appendChild(summRow);
-						summRow.appendChild(summQuestion);
-						summRow.appendChild(summCorrect);
-						summRow.appendChild(summResponse);
-					}
-				};
-
-				function toSummary () {
-					buildSummary ();
-					$('#quiz').slideUp("slow");
-					$('#summary').show("fast");
-				};
-				
-			window.onload = function () {
-				var answerElements = getAnswerElements ();
-				var questionElement = document.getElementById("question");
-				var advanceScreen = document.getElementById("advanceScreen");
-			
-				// begins the quiz
-				loadSet(quizSet[count], questionElement, answerElements);
-
-				function handleAnswerClick (answerElementClicked) {
-					answerElementClicked.onclick = function () {
-						answerElementChosen = answerElementClicked;
-						responses[count] = new SelectedAnswer(questionElement.innerHTML, answerElementClicked.innerHTML);
-						if (count == (QUIZ_LENGTH - 1))
-							document.getElementById("advanceScreen").innerHTML = "See Summary";
-						$('#showAnswer').show();
-						$('#advanceScreen').show();
-					};
-				};
-
-				// handle next question click event
-				advanceScreen.onclick = function () {
-					if (count < (QUIZ_LENGTH - 1)) {
-						$(".ansColor").css("background", DESELECTED_COLOR);
-						loadSet (quizSet[++count], questionElement, answerElements);
-						$('#showAnswer').hide();
-						$('#correctAnswer').hide();
-						$('#advanceScreen').hide();
-						counterElement = document.getElementById("counter");
-						counterElement.innerHTML = count + 1;
-					} else {
-						toSummary ();
-					}
-				};
-				
-				for (var i = 0; i < answerElements.length; i++) {
-					handleAnswerClick (answerElements[i]);
-				}
-				
-				// show answers and color green if they match, red if not
-				var showAnswer = document.getElementById ("showAnswer");
-				showAnswer.onclick = function () {
-					if ( quizSet[count].answers[0] == responses[count].answer ) {
-						correctAnswer.style.backgroundColor = CORRECT_COLOR;
-						answerElementChosen.style.backgroundColor = CORRECT_COLOR;
-					} else {
-						correctAnswer.style.backgroundColor = INCORRECT_COLOR;
-						answerElementChosen.style.backgroundColor = INCORRECT_COLOR;
-					}
-					$('#correctAnswer').show();
-
-				};
+			// initialize the quiz by getting new values for the quiz set, shuffling the answers,
+			// then displaying them along with the question
+			function loadQuiz () {
+				questionNumber = 0;
+				quizSets = shuffledRandomSubArray (questionSets, QUIZ_LENGTH);
+				displayQuestionSet ();
 			};
+
+			function displayQuestionSet () {
+				$("#question").html(quizSets[questionNumber].question);
+				$("#correctAnswer").html(quizSets[questionNumber].answers[0]);
+				shuffledAnswers = shuffle (quizSets[questionNumber].answers);
+				for (var i = 0; i < shuffledAnswers.length; i++) {
+					$(".answerEl").eq(i).html(shuffledAnswers[i]);
+				}
+			};
+
+			// advances question set to next in quizSets array
+			function nextQuestionSet () { questionNumber++; };
+
+			$(document).ready ( function () {
+				// initialize a quiz
+				$("#startButton").click ( function () {
+					$("#menu").hide ();
+					$("#quiz").show ();
+					loadQuiz ();
+				});
+
+				// listen for answer clicks
+				$(".answerEl").click ( function () {
+					if ( ($("#showAnswer").css("display")) == "none" )
+						$("#showAnswer, #advanceScreen").show ();
+					
+					if ( ($("#correctAnswer").css("display")) == "none" ) {
+						responses[questionNumber] = $(this).html();
+						$(".answerEl").css ("background", DESELECTED_COLOR);
+						$(this).css ("background", SELECTED_COLOR);
+					}
+				});
+
+				// show answer if clicked
+				$("#showAnswer").click ( function () {
+					$("#correctAnswer").show ();
+				});
+
+				// advance screen
+				// if more questions, to next question
+				// in no more questions, to summary
+				$("#advanceScreen").click ( function () {
+					// if more questions
+					if (questionNumber < LAST_QUESTION) {
+						nextQuestion (); // todo: write this method or use a predefined one
+					} else {
+						// load summary
+						// **i.e. hide this view and display summary div
+					}
+				});
+			});		
 		</script>
 	</body>
 </html>
