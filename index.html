@@ -76,126 +76,141 @@
 					<div class="well col-xs-6" id="toMenu">Main Menu</div>
 				</div>
 			</div>
-			<div class="container" id="summKey">
+			<div class="container" id="summView">
 				<div class="row">
 					<div class="well col-xs-4"><b>Question</b></div>
 					<div class="well col-xs-4"><b>Correct Answer</b></div>
 					<div class="well col-xs-4"><b>Response</b></div>
 				</div>
 			</div>
-			<div class="container" id="summBody"></div>
 		</div>
 		<!-- end Summary section -->
 		<script src="js/qimport.js"></script>
 		<script src="js/questions.js"></script>
 
 		<script>
-			var count = 0;
-			var answerElementChosen; // stores answer element clicked
-			var QUIZ_LENGTH	= 1;
-			var quizSet = shuffledRandomSubArray(questionSets, QUIZ_LENGTH);
+			var questionNumber; // don't initialize until quiz begins
+			var QUIZ_LENGTH = 1; // eventually make config UI for this
+			var LAST_QUESTION = QUIZ_LENGTH - 1;
+			var quizSets = [];
 			var responses = [];
+
+			function mainMenu () {
+				$("#quiz, #summary").hide ();
+				$("#menu").show ();
+			};
 			
-				function buildSummary () {
-					var summQuestion;
-					var summCorrect;
-					var summResponse;
-					var summElement;
-					var summRow;
-					var summBody = document.getElementById("summBody");
-					var rowStart = "<div class='row'>";
-					var rowEnd = "</div>";
+			// initialize the quiz by getting new values for the quiz set, shuffling the answers,
+			// then displaying them along with the question
+			function loadQuiz () {
+				questionNumber = 0;
+				quizSets = shuffledRandomSubArray (questionSets, QUIZ_LENGTH);
+				displayQuestionSet ();
+				$(".bookend").hide ();
+				$("#quiz").show ();
+			};
 
-					for (var i = 0; i < QUIZ_LENGTH; i++) {
-						summRow = document.createElement("div");
-						summRow.className = "row";
+			function displayQuestionSet () {
+				$("#question").html(quizSets[questionNumber].question);
+				$("#correctAnswer").html(quizSets[questionNumber].answers[0]);
+				$("#counter").html(questionNumber + 1);
+				$(".ansColor").css("background", DESELECTED_COLOR);
+				shuffledAnswers = shuffle (quizSets[questionNumber].answers);
+				for (var i = 0; i < shuffledAnswers.length; i++) {
+					$(".answerEl").eq(i).html(shuffledAnswers[i]);
+				}
+			};
 
-						summQuestion = document.createElement("div");
-						summQuestion.className = "well col-xs-4 summItem summQuest";
-						summQuestion.innerHTML = responses[i].question;
-						
-						summCorrect = document.createElement("div");
-						summCorrect.className = "well col-xs-4 summItem summCorr";
-						summCorrect.innerHTML = quizSet[i].answers[0];
-						
-						summResponse = document.createElement("div");
-						summResponse.className = "well col-xs-4 summItem summResp";
-						summResponse.innerHTML = responses[i].answer;
+			// advances question set to next in quizSets array
+			function nextQuestionSet () { questionNumber++; };
 
-						if (quizSet[i].checkAnswer(responses[i].answer)) {
-							summResponse.style.backgroundColor = CORRECT_COLOR;
-						} else {
-							summResponse.style.backgroundColor = INCORRECT_COLOR;
-						}
-						
-						document.getElementById("summBody").appendChild(summQuestion);
-						document.getElementById("summBody").appendChild(summCorrect);
-						document.getElementById("summBody").appendChild(summResponse);
-						summBody.appendChild(summRow);
-						summRow.appendChild(summQuestion);
-						summRow.appendChild(summCorrect);
-						summRow.appendChild(summResponse);
-					}
-				};
+			function displaySummary () {
+				$(".summElement").remove ();
+				var row; // q for question, key for correct answer, r for response
+				var summView = document.getElementById("summView");
+				// todo: populate summary contents (question, answer, response)
+				for (var i = 0; (i < quizSets.length) && (i < responses.length); i++) {
 
-				function toSummary () {
-					buildSummary ();
-					$('#quiz').slideUp("slow");
-					$('#summary').show("fast");
-				};
-				
-			window.onload = function () {
-				var answerElements = getAnswerElements ();
-				var questionElement = document.getElementById("question");
-				var advanceScreen = document.getElementById("advanceScreen");
-			
-				// begins the quiz
-				loadSet(quizSet[count], questionElement, answerElements);
+					row = getSummaryRow (quizSets[i].question,
+										quizSets[i].answers[0],
+										responses[i]);
 
-				function handleAnswerClick (answerElementClicked) {
-					answerElementClicked.onclick = function () {
-						answerElementChosen = answerElementClicked;
-						responses[count] = new SelectedAnswer(questionElement.innerHTML, answerElementClicked.innerHTML);
-						if (count == (QUIZ_LENGTH - 1))
-							document.getElementById("advanceScreen").innerHTML = "See Summary";
-						$('#showAnswer').show();
-						$('#advanceScreen').show();
-					};
-				};
-
-				// handle next question click event
-				advanceScreen.onclick = function () {
-					if (count < (QUIZ_LENGTH - 1)) {
-						$(".ansColor").css("background", DESELECTED_COLOR);
-						loadSet (quizSet[++count], questionElement, answerElements);
-						$('#showAnswer').hide();
-						$('#correctAnswer').hide();
-						$('#advanceScreen').hide();
-						counterElement = document.getElementById("counter");
-						counterElement.innerHTML = count + 1;
-					} else {
-						toSummary ();
-					}
-				};
-				
-				for (var i = 0; i < answerElements.length; i++) {
-					handleAnswerClick (answerElements[i]);
+					summView.appendChild (row);
 				}
 				
-				// show answers and color green if they match, red if not
-				var showAnswer = document.getElementById ("showAnswer");
-				showAnswer.onclick = function () {
-					if ( quizSet[count].answers[0] == responses[count].answer ) {
-						correctAnswer.style.backgroundColor = CORRECT_COLOR;
-						answerElementChosen.style.backgroundColor = CORRECT_COLOR;
-					} else {
-						correctAnswer.style.backgroundColor = INCORRECT_COLOR;
-						answerElementChosen.style.backgroundColor = INCORRECT_COLOR;
-					}
-					$('#correctAnswer').show();
-
-				};
+				$("#quiz, #menu").hide ();
+				$("#summary").show ();
 			};
+			
+			// preformatted summary element (question, key, or response)
+			function getSummaryElement (htmlContent) {
+					var summaryElement = document.createElement("div");
+					summaryElement.className = "col-xs-4 well summElement";
+					summaryElement.innerHTML = htmlContent;
+					return summaryElement;
+			};
+
+			function getSummaryRow (qContent, keyContent, rContent) {
+					var row = document.createElement("div");
+					row.className = "row summRow";
+					
+					row.appendChild (getSummaryElement (qContent));
+					row.appendChild (getSummaryElement (keyContent));
+					row.appendChild (getSummaryElement (rContent));
+
+					return row;
+			};
+
+			$(document).ready ( function () {
+				// initialize a quiz
+				$("#startButton").click ( function () {
+					loadQuiz ();
+				});
+
+				// listen for answer clicks
+				$(".answerEl").click ( function () {
+					if ( ($("#showAnswer").css("display")) == "none" )
+						$("#showAnswer, #advanceScreen").show ();
+					
+					if ( ($("#correctAnswer").css("display")) == "none" ) {
+						responses[questionNumber] = $(this).html();
+						$(".answerEl").css ("background", DESELECTED_COLOR);
+						$(this).css ("background", SELECTED_COLOR);
+					}
+				});
+
+				// show answer if clicked
+				$("#showAnswer").click ( function () {
+					$("#correctAnswer").show ();
+				});
+
+				// advance screen
+				// if more questions, to next question
+				// in no more questions, to summary
+				$("#advanceScreen").click ( function () {
+					// if more questions
+					if (questionNumber < LAST_QUESTION) {
+						nextQuestionSet (); // go to next question set
+						displayQuestionSet ();
+					} else {
+						// otherwise the quiz has ended
+						// hide this view and display summary div
+						displaySummary ();
+					}
+					$("#advanceScreen, #showAnswer").hide ();
+				});
+
+				// bind "Try Again" button to load quiz
+				$("#again").click ( function () {
+					loadQuiz ();
+				});
+				
+				// bind "Main Menu" button to, guess what, go back to the main menu
+				$("#toMenu").click ( function () {
+					mainMenu ();
+				});
+
+			});
 		</script>
 	</body>
 </html>

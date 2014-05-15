@@ -31,13 +31,3 @@ h1 {
 	text-align: center;
 	margin: 0 auto;
 }
-
-.summItem {
-	margin-top: 0;
-	margin-bottom: 0;
-	height: 100%;
-}
-
-#summKey, #summKey.well {
-	margin-bottom: 0;
-}
