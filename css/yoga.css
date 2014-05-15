@@ -1,33 +1,21 @@
-body {
-	font-size: 16px;
-}
-
-.well {
-	padding: 0.5em;
-}
-
-h1 {
-	font-size: 150%;
-}
-
 #showAnswer {
-	display: none;
+    display: none;
 }
 
 #correctAnswer {
-	display: none;
+    display: none;
 }
 
 #advanceScreen {
-	display: none;
-	background-color: #82CAFA;
+    display: none;
+    background-color: #82CAFA;
 }
 
 #quiz, #summary {
-	display: none;
+    display: none;
 }
 
 .well h1 {
-	text-align: center;
-	margin: 0 auto;
+    text-align: center;
+    margin: 0 auto;
 }
