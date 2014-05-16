@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no">
-		<title>Quiz UI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Yoga Teacher Training Quiz</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -90,7 +90,7 @@
 
 		<script>
 			var questionNumber; // don't initialize until quiz begins
-			var QUIZ_LENGTH = 1; // eventually make config UI for this
+			var QUIZ_LENGTH = 5; // eventually make config UI for this
 			var LAST_QUESTION = QUIZ_LENGTH - 1;
 			var quizSets = [];
 			var responses = [];
@@ -150,6 +150,7 @@
 					return summaryElement;
 			};
 
+			// div .row containing question, key, and response
 			function getSummaryRow (qContent, keyContent, rContent) {
 					var row = document.createElement("div");
 					row.className = "row summRow";
