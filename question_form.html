@@ -26,45 +26,45 @@
 		<h1>Yoga Teacher Training Quiz App - Submit Question</h1>
 		<p class="well">Fill out all the fields in this form to add more questions to the quiz app so you and your classmates can quiz yourselves!</p>
 	</div>
-	<form action="php/store_question.php" class="container">
+	<form action="php/store_question.php" method="post" class="container">
 		<div class="row tableRow">
 			<div class="tableCell">
 				<label for="question">Enter a question:</label>
 			</div>
 			<div class="tableCell">
-				<input type="text" name="question" id="question" placeholder="The pelvic floor corresponds with which energy center?">
+				<input type="text" name="question" id="question" placeholder="The pelvic floor corresponds with which energy center?" required>
 			</div>
 		</div>
 		<div class="row tableRow">
 			<div class="tableCell">
-				<label for="">Enter the CORRECT answer:</label>
+				<label for="answer0">Enter the CORRECT answer:</label>
 			</div>
 			<div class="tableCell">
-				<input type="text" name="answer0" id="answer0" placeholder="mula bandha">
-			</div>
-		</div>
-		<div class="row tableRow">
-			<div class="tableCell">
-				<label for="">Enter a WRONG answer:</label>
-			</div>
-			<div class="tableCell">
-				<input type="text" name="answer1" id="answer1" placeholder="pada bandha">
+				<input type="text" name="answer0" id="answer0" placeholder="mula bandha" required>
 			</div>
 		</div>
 		<div class="row tableRow">
 			<div class="tableCell">
-				<label for="">Enter a WRONG answer:</label>
+				<label for="answer1">Enter a WRONG answer:</label>
 			</div>
 			<div class="tableCell">
-				<input type="text" name="answer2" id="answer2" placeholder="sukha bandha">
+				<input type="text" name="answer1" id="answer1" placeholder="pada bandha" required>
 			</div>
 		</div>
 		<div class="row tableRow">
 			<div class="tableCell">
-				<label for="">Enter a WRONG answer:</label>
+				<label for="answer2">Enter a WRONG answer:</label>
 			</div>
 			<div class="tableCell">
-				<input type="text" name="answer3" id="answer3" placeholder="uddiyana bandha"><br>
+				<input type="text" name="answer2" id="answer2" placeholder="sukha bandha" required>
+			</div>
+		</div>
+		<div class="row tableRow">
+			<div class="tableCell">
+				<label for="answer3">Enter a WRONG answer:</label>
+			</div>
+			<div class="tableCell">
+				<input type="text" name="answer3" id="answer3" placeholder="uddiyana bandha" required>
 			</div>
 		</div>
 		<div class="row tableRow" id="buttonHolder">
@@ -72,11 +72,23 @@
 				<button type="submit">Submit Question!</button>
 			</div>
 		</div>
-		
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="js/jquery.min.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="js/bootstrap.min.js"></script>
-	</form> 
+	</form>
+	<div class="container">
+		<div class="row">
+			<div class="well" id="toQuiz"><h2 class="">Back to Quiz</h2></div>
+		</div>
+	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="js/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready ( function () {
+			$("#toQuiz").click ( function () {
+				window.open ('http://www.wellsfromwales.com/yoga/');
+			});
+		});
+	</script>
 </body>
 </html>

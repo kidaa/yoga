@@ -1,6 +1,6 @@
 body {
 	background: #BBB;
-	font-size: 18px;
+	font-size: 14px;
 }
 
 .well {
@@ -9,7 +9,15 @@ body {
 
 h1 {
 	text-align: center;
-	font-size: 150%;
+	font-size: 200%;
+}
+
+h2 {
+	text-align: center;
+}
+
+.well#toQuiz {
+	cursor: pointer;
 }
 
 input[type="text"], button {
@@ -18,7 +26,7 @@ input[type="text"], button {
 }
 
 input[type="text"] {
-	width: 450px;
+	width: 500px;
 	border-style: groove;
 	background: #E6CEBB;
 }
