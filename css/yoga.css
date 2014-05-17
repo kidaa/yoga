@@ -1,3 +1,19 @@
+body {
+	font-size: 22px;
+	cursor: default;
+	height: 100%;
+	background: linear-gradient(0deg, #DB4C2C, #EBC137) no-repeat;
+	background-color: #DB4C2C;
+}
+
+div h1 {
+	text-align: center;
+}
+
+.img-responsive {
+	margin: 0 auto;
+}
+
 #showAnswer {
     display: none;
 }
@@ -11,11 +27,24 @@
     background-color: #82CAFA;
 }
 
-#quiz, #summary {
+#quiz, #summary, #about {
     display: none;
 }
 
 .well h1 {
     text-align: center;
     margin: 0 auto;
+}
+
+.well.nav {
+	cursor: pointer;
+	text-align: center;
+}
+
+.navMenu {
+	padding-top: 1em;
+}
+
+a {
+	cursor: pointer;
 }

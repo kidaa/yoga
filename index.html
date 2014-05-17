@@ -30,11 +30,15 @@
 	<body>
 		<div class="container bookend" id="menu">
 			<div class="row">
-				<img>
+				<h1>Yoga Teacher Training Quiz</h1>
+				<img class="img-responsive" src="images/om_transparent.png">
 			</div>
 			<div class="row">
-				<div class="well col-md-6 col-sm-12" id="startButton">Start Quiz</div>
-				<div class="well col-md-6 col-sm-12" id="aboutButton">About</div>
+				<div class="well col-md-8 col-md-offset-2 col-sm-12 nav" id="startButton">Start Quiz</div>
+			</div>
+			<div class="row">
+				<div class="well col-md-5 col-md-offset-1 col-sm-12 nav addQuestion">Contribute to the Quiz</div>
+				<div class="well col-md-5 col-sm-12 nav" id="aboutButton">About</div>
 			</div>
 		</div>
 		<!-- end Menu -->
@@ -43,24 +47,24 @@
 				<div class="well"><h1 id="question"></h1></div>
 			</div>
 			<div class="row">
-				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans0"></div></div>
-				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans1"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl nav" id="ans0"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl nav" id="ans1"></div></div>
 				<div class="clearfix"></div>
-				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans2"></div></div>
-				<div class="col-xs-6"><div class="well ansColor answerEl" id="ans3"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl nav" id="ans2"></div></div>
+				<div class="col-xs-6"><div class="well ansColor answerEl nav" id="ans3"></div></div>
 			</div>
 			<div class="row">
 				<div class="well ansColor" id="correctAnswer"></div>
 			</div>
 			<div class="row">
 				<div class="col-xs-4">
-					<div class="well" id="showAnswer">Show Answer</div>
+					<div class="well nav" id="showAnswer">Show Answer</div>
 				</div>
 				<div class="col-xs-4">
 					<div class="well" id="counter">1</div>
 				</div>
 				<div class="col-xs-4">
-					<div class="well" id="advanceScreen">Next Question</div>
+					<div class="well nav" id="advanceScreen">Next Question</div>
 				</div>
 			</div>
 		</div>
@@ -70,10 +74,11 @@
 				<div class="row">
 					<div class="well col-lg-12"><h1>Summary</h1></div>
 				</div>
+			</div>
 			<div class="container" id="summMenu">
 				<div class="row">
-					<div class="well col-xs-6" id="again">Try Again</div>
-					<div class="well col-xs-6" id="toMenu">Main Menu</div>
+					<div class="well col-xs-5 nav" id="again">Try Again</div>
+					<div class="well col-xs-5 col-xs-offset-2 nav toMenu">Main Menu</div>
 				</div>
 			</div>
 			<div class="container" id="summView">
@@ -85,19 +90,45 @@
 			</div>
 		</div>
 		<!-- end Summary section -->
+		<div class="container" id="about">
+			<div class="row">
+				<div class="well"><h1>About this App</h1></div>
+			</div>
+			<div class="col-sm-3">
+				<div class="navMenu">
+					<p><a href="http://www.wellsfromwales.com">Our Homepage</a></p>
+					<p><a href="http://www.wellsfromwales.com/gnolaandmyrd/">Our Blog</a></p>
+					<p><a class="toMenu">Main Menu</a></p>
+					<p><a class="addQuestion">Help Your Classmates!</a></p>
+				</div>
+			</div>
+			<div class="col-sm-9">
+				<h3>Author</h3>
+				<p>Aaron Wells lives with his lovely wife Jenni in Federal Way, WA. For the time being we are squatti --
+				ahem -- housesitting for a couple who is away on a mission for the LDS Church.</p>
+				<p>I have big aspirations to become a skilled professional web developer.</p>
+				<p>Jenni has aspirations to teach yoga and bring healing to the world through self-knowledge and self-love.</p>
+				<p>We work. We play. We live. We love :)</p>
+			</div>
+		</div>
 		<script src="js/qimport.js"></script>
 		<script src="js/questions.js"></script>
 
 		<script>
 			var questionNumber; // don't initialize until quiz begins
-			var QUIZ_LENGTH = 5; // eventually make config UI for this
+			var QUIZ_LENGTH = 10; // eventually make config UI for this
 			var LAST_QUESTION = QUIZ_LENGTH - 1;
 			var quizSets = [];
 			var responses = [];
 
 			function mainMenu () {
-				$("#quiz, #summary").hide ();
+				$(".container").hide ();
 				$("#menu").show ();
+			};
+
+			function displayAbout () {
+				$(".container").hide ();
+				$("#about").show ();
 			};
 			
 			// initialize the quiz by getting new values for the quiz set, shuffling the answers,
@@ -106,6 +137,7 @@
 				questionNumber = 0;
 				quizSets = shuffledRandomSubArray (questionSets, QUIZ_LENGTH);
 				displayQuestionSet ();
+				updateAdvanceScreen ();
 				$(".bookend").hide ();
 				$("#quiz").show ();
 			};
@@ -124,6 +156,14 @@
 			// advances question set to next in quizSets array
 			function nextQuestionSet () { questionNumber++; };
 
+			function updateAdvanceScreen () {
+				if (questionNumber == LAST_QUESTION) {
+					$("#advanceScreen").html ("View Summary");
+				} else {
+					$("#advanceScreen").html ("Next Question");
+				}
+			};
+
 			function displaySummary () {
 				$(".summElement").remove ();
 				var row; // q for question, key for correct answer, r for response
@@ -138,8 +178,8 @@
 					summView.appendChild (row);
 				}
 				
-				$("#quiz, #menu").hide ();
-				$("#summary").show ();
+				$(".container").hide ();
+				$("#summary, #summary .container").show ();
 			};
 			
 			// preformatted summary element (question, key, or response)
@@ -166,6 +206,16 @@
 				// initialize a quiz
 				$("#startButton").click ( function () {
 					loadQuiz ();
+				});
+
+				// go to info page
+				$("#aboutButton").click ( function () {
+					displayAbout ();
+				});
+
+				// submit a question
+				$(".addQuestion").click ( function () {
+					window.location.href = "http://www.wellsfromwales.com/yoga/question_form.html";
 				});
 
 				// listen for answer clicks
@@ -198,7 +248,8 @@
 						// hide this view and display summary div
 						displaySummary ();
 					}
-					$("#advanceScreen, #showAnswer").hide ();
+					updateAdvanceScreen ();
+					$("#advanceScreen, #showAnswer, #correctAnswer").hide ();
 				});
 
 				// bind "Try Again" button to load quiz
@@ -206,7 +257,7 @@
 					loadQuiz ();
 				});
 
-				$("#toMenu").click ( function () {
+				$(".toMenu").click ( function () {
 					mainMenu ();
 				});
 
