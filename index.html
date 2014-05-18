@@ -99,20 +99,25 @@
 					<p><a class="toMenu">Main Menu</a></p>
 					<p><a href="http://www.wellsfromwales.com">Our Homepage</a></p>
 					<p><a href="http://www.wellsfromwales.com/gnolaandmyrd/">Our Blog</a></p>
-					<p><a class="addQuestion">Help Your Classmates!</a></p>
+					<p><a class="addQuestion">Contribute Questions</a></p>
+					<p>Aaron Wells<br>chacewells@gmail.com</p>
 				</div>
 			</div>
 			<div class="col-sm-9">
 				<h3>Using the App</h3>
-				<p>This is a simple web app to help you improve their vocabulary and understanding of good yoga practice as 
-				you work towards your yoga teacher certification. I am not a yoga expert, so for this app to be successful,
-				you the students need to help each other out by providing content. You can do this by submitting questions
-				through the link on the left or the one on the home screen. The app will not be updated automatically.
-				Until I get that process automated, I will be managing the questions database manually for the time being.
-				</p>
-				<p>This is my first major project, so I recognize it's not the prettiest app around, but I've done what I could
+				<p>This is a simple web app to help you improve your vocabulary and understanding of good yoga practice as 
+				you work towards certification.</p>
+				<p>I'm not a yoga expert, so I don't provide any of the quiz content. Please make this app a success by submitting questions! It's easy:
+				<ol>
+					<li>Click on 'Contribute Questions' on the left</li>
+					<li>Type in a multiple choice question using the form</li>
+					<li>Click submit</li>
+					<li>The questions are updated daily</li>
+				</ol>
+				The app is not updated automatically. Until I get that process automated, I will manage that manually.</p>
+				<p>This is my first major project, so I recognize it's not the prettiest app around, but I've done what I can
 				to make it fun and easy to use. In time, I will add features and clean up the interface somewhat. If you have
-				any suggestions to add features or make the add prettier, please contact me with your ideas!</p>
+				any suggestions to add features or make the app prettier, please email me with your ideas!</p>
 				<h3>Author</h3>
 				<p>Aaron Wells lives with his lovely wife Jenni in Federal Way, WA. For the time being we are squatti --
 				ahem -- housesitting for a couple who is away on a mission for the LDS Church.</p>
@@ -130,6 +135,7 @@
 			var LAST_QUESTION = QUIZ_LENGTH - 1;
 			var quizSets = [];
 			var responses = [];
+			var $answerElSelected;
 
 			function mainMenu () {
 				$(".container").hide ();
@@ -155,7 +161,7 @@
 			function displayQuestionSet () {
 				$("#question").html(quizSets[questionNumber].question);
 				$("#correctAnswer").html(quizSets[questionNumber].answers[0]);
-				$("#counter").html(questionNumber + 1);
+				$("#counter").html((questionNumber + 1) + " / " + QUIZ_LENGTH);
 				$(".ansColor").css("background", DESELECTED_COLOR);
 				shuffledAnswers = shuffle (quizSets[questionNumber].answers);
 				for (var i = 0; i < shuffledAnswers.length; i++) {
@@ -174,22 +180,51 @@
 				}
 			};
 
+			// builds summary screen
 			function displaySummary () {
 				$(".summElement").remove ();
+				$answerElSelected = null;
 				var row; // q for question, key for correct answer, r for response
 				var summView = document.getElementById("summView");
-				// todo: populate summary contents (question, answer, response)
+				var hasCorrectAnswer; // boolean determines how to color divs
 				for (var i = 0; (i < quizSets.length) && (i < responses.length); i++) {
+
+					hasCorrectAnswer = quizSets[i].checkAnswer (responses[i]);
 
 					row = getSummaryRow (quizSets[i].question,
 										quizSets[i].answers[0],
-										responses[i]);
+										responses[i],
+										hasCorrectAnswer);
 
 					summView.appendChild (row);
 				}
 				
 				$(".container").hide ();
 				$("#summary, #summary .container").show ();
+			};
+
+			// div.row containing question, key, and response
+			function getSummaryRow (qContent, keyContent, rContent, hasCorrectAnswer) {
+				
+                keyElement = getSummaryElement (keyContent);
+                rElement = getSummaryElement (rContent);
+
+				if (hasCorrectAnswer) {
+					keyElement.style.backgroundColor = CORRECT_COLOR;
+					rElement.style.backgroundColor = CORRECT_COLOR;
+				} else {
+					keyElement.style.backgroundColor = INCORRECT_COLOR;
+					rElement.style.backgroundColor = INCORRECT_COLOR;
+				}
+
+				var row = document.createElement("div");
+				row.className = "row summRow";
+				
+				row.appendChild (getSummaryElement (qContent));
+				row.appendChild (keyElement);
+				row.appendChild (rElement);
+
+				return row;
 			};
 			
 			// preformatted summary element (question, key, or response)
@@ -198,18 +233,6 @@
 					summaryElement.className = "col-xs-4 well summElement";
 					summaryElement.innerHTML = htmlContent;
 					return summaryElement;
-			};
-
-			// div .row containing question, key, and response
-			function getSummaryRow (qContent, keyContent, rContent) {
-					var row = document.createElement("div");
-					row.className = "row summRow";
-					
-					row.appendChild (getSummaryElement (qContent));
-					row.appendChild (getSummaryElement (keyContent));
-					row.appendChild (getSummaryElement (rContent));
-
-					return row;
 			};
 
 			$(document).ready ( function () {
@@ -225,7 +248,7 @@
 
 				// submit a question
 				$(".addQuestion").click ( function () {
-					window.location.href = "http://www.wellsfromwales.com/yoga/question_form.html";
+					window.location.href = "question_form.html";
 				});
 
 				// listen for answer clicks
@@ -237,11 +260,19 @@
 						responses[questionNumber] = $(this).html();
 						$(".answerEl").css ("background", DESELECTED_COLOR);
 						$(this).css ("background", SELECTED_COLOR);
+						$answerElSelected = $(this);
 					}
 				});
 
-				// show answer if clicked
+				// show correct answer if clicked
 				$("#showAnswer").click ( function () {
+					if ( quizSets[questionNumber].checkAnswer (responses[questionNumber]) ) {
+						$answerElSelected.css ("background", CORRECT_COLOR);
+						$("#correctAnswer").css ("background", CORRECT_COLOR);
+					} else {
+						$answerElSelected.css ("background", INCORRECT_COLOR);
+						$("#correctAnswer").css ("background", INCORRECT_COLOR);
+					}
 					$("#correctAnswer").show ();
 				});
 

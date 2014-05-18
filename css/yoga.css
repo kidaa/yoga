@@ -25,7 +25,7 @@ div h1 {
 
 #advanceScreen {
     display: none;
-    background-color: #82CAFA;
+    background-color: #A0ACF0;
 }
 
 #quiz, #summary, #about {
@@ -43,6 +43,10 @@ div div.well {
 
 .well.nav {
 	cursor: pointer;
+	text-align: center;
+}
+
+#counter {
 	text-align: center;
 }
 

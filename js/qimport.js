@@ -1,7 +1,7 @@
-var CORRECT_COLOR = "green";
-var INCORRECT_COLOR = "red";
-var SELECTED_COLOR = "yellow";
-var DESELECTED_COLOR = "#f5f5f5";
+var CORRECT_COLOR = "#5CE65C";
+var INCORRECT_COLOR = "#E64848";
+var SELECTED_COLOR = "#FFFF75";
+var DESELECTED_COLOR = "#EFCD5D";
 
 // answers is an array of answers
 // answer[0] is always the correct answer
