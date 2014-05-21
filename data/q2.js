@@ -8,7 +8,7 @@ var questionSets =
 			"pada bandha",
 			"sukha bandha",
 			"uddiyana bandha"
-		]
+		[
 	),
 	new QuestionSet (
 		"the convex/ concave principle states that proper technique in a bend is to...",
@@ -17,7 +17,7 @@ var questionSets =
 			"bend deeply, then straighten the spine. this deepens the concavity.",
 			"hold the muscles loosly so the convex side of the spine is not strained in the bend ",
 			"do not do bending of the spine. ever."
-		]
+		[
 	),
 	new QuestionSet (
 		"what is the motion ofbthe lumbar spine during  psoas contraction?",
@@ -26,7 +26,7 @@ var questionSets =
 			"moves anterior, increasing the natural lumbar curve",
 			"moves posterior, deepening the natural lumbar curve",
 			"moves anterior, flattening the natural lbar   curve."
-		]
+		[
 	),
 	new QuestionSet (
 		"when the psoas is shortened and too tight, these other probelms may arise...",
@@ -35,7 +35,7 @@ var questionSets =
 			"tight hamstrings",
 			"limited hip mobility",
 			"restricted curve of lumbar spine"
-		]
+		[
 	),
 	new QuestionSet (
 		"what principle(s) of alignment will help treat yoga butt?",
@@ -44,7 +44,7 @@ var questionSets =
 			"inward spiral of the knees",
 			"deepen the lumbar curve",
 			"complete psoas release and hamstring engagement"
-		]
+		[
 	),
 	new QuestionSet (
 		"a student comes to you with conplaints of instability in the poses and  lower back pain.  what is a good  exercise to help them strengthen their core muscles?",
@@ -53,7 +53,7 @@ var questionSets =
 			"balasana",
 			"virabhadarasna III",
 			"just tell them to hold the pose longer"
-		]
+		[
 	),
 	new QuestionSet (
 		"which motion of the ankle is tri planar?",
@@ -62,7 +62,7 @@ var questionSets =
 			"inversion",
 			"dorsiflexion",
 			"external rotation"
-		]
+		[
 	),
 	new QuestionSet (
 		"which muscle is reaposible for abducting the hip  joint?",
@@ -71,7 +71,7 @@ var questionSets =
 			"abductor magnus",
 			"rectus remoris",
 			"gluteus maximus"
-		]
+		[
 	),
 	new QuestionSet (
 		"what are the primary muscles of respiration?",
@@ -80,7 +80,7 @@ var questionSets =
 			"trapezius, intercostals, scalenes",
 			"diaphragm, sternocleidomastoid,  transvers  abdominus,",
 			"pectoralis major, scalenes, intercostals "
-		]
+		[
 	),
 	new QuestionSet (
 		"which pose would prepare your student for virabhadrasana 1?",
@@ -89,7 +89,7 @@ var questionSets =
 			"virabhadrasana III",
 			"vrksasana",
 			"balasana"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the yoga sutras of Patanjali there are 8 limbs of yoga, what are these limbs called.",
@@ -98,7 +98,7 @@ var questionSets =
 			"Vinyasa",
 			"Yamas",
 			"Meditation"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the 8 limbs of yoga, which limb comes first?",
@@ -107,7 +107,7 @@ var questionSets =
 			"Niyamas",
 			"Asana",
 			"Pranayama"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the 8 limbs of yoga, which limb comes second?",
@@ -116,7 +116,7 @@ var questionSets =
 			"Yamas",
 			"Pranayama ",
 			"Pratyahara"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the 8 limbs of yoga, which limb comes third?",
@@ -125,7 +125,7 @@ var questionSets =
 			"Dhyana",
 			"Pranayama",
 			"Pratyahara"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the 8 limbs of yoga, which limb comes fourth?",
@@ -134,7 +134,7 @@ var questionSets =
 			"Asana",
 			"Dharana",
 			"Dhyana"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the 8 limbs of yoga, which limb comes fifth?",
@@ -143,7 +143,7 @@ var questionSets =
 			"Pranayama",
 			"Dharana",
 			"Samadhi"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the 8 limbs of yoga, which comes sixth?",
@@ -152,7 +152,7 @@ var questionSets =
 			"Samadhi",
 			"Pranayama",
 			"Yamas"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the 8 limbs of yoga, which comes seventh?",
@@ -161,7 +161,7 @@ var questionSets =
 			"Samadhi",
 			"Dharana",
 			"Niyamas"
-		]
+		[
 	),
 	new QuestionSet (
 		"In the 8 limbs of yoga, what is the 8th and final limb?",
@@ -170,7 +170,7 @@ var questionSets =
 			"Yamas",
 			"Dhyana",
 			"Dharana"
-		]
+		[
 	),
 	new QuestionSet (
 		"What are the yamas?",
@@ -179,7 +179,7 @@ var questionSets =
 			"Sauca, Ahimsa, Satya, Asana, Dharana",
 			"Ahimsa, Sauca, Asteya, Tapas, Aparigraha",
 			"Satya, Ahimsa, Brahmacarya, Pranayama, Dhyana"
-		]
+		[
 	),
 	new QuestionSet (
 		"What are the Niyamas?",
@@ -188,7 +188,7 @@ var questionSets =
 			"Ahimsa, Sauca, Tapas, Satya, Aparigraha",
 			"Santosa, Ahimsa, Isvara-pranidhana, Samadhi",
 			"Pranayama, Santosa, Tapas, Satya, Pratyahara"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the first Yama, Ahimsa, mean?",
@@ -197,7 +197,7 @@ var questionSets =
 			"non-stealing",
 			"non-hoarding",
 			"truthfulness"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the second Yama, Satya, mean?",
@@ -206,7 +206,7 @@ var questionSets =
 			"non-harming",
 			"self-study",
 			"devotion"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the third Yama, Asteya, mean?",
@@ -215,7 +215,7 @@ var questionSets =
 			"nonviolence",
 			"moderation",
 			"purity"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the fourth Yama, Brahmacarya, mean?",
@@ -224,7 +224,7 @@ var questionSets =
 			"indulgence",
 			"time theft",
 			"zeal"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the fifth Yama, Aparigraha, mean?",
@@ -233,7 +233,7 @@ var questionSets =
 			"moderation, control",
 			"truth, honesty",
 			"self-study"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the first Niyama, Sauca, mean?",
@@ -242,7 +242,7 @@ var questionSets =
 			"Pride",
 			"Luck",
 			"Contentment"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the second Niyama, Santosa, mean?",
@@ -251,7 +251,7 @@ var questionSets =
 			"Commitment",
 			"Zeal",
 			"Purity"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the third Niyama, Tapas, mean?",
@@ -260,7 +260,7 @@ var questionSets =
 			"Contentment, Happiness",
 			"Postures",
 			"Meditation"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the fourth Niyama, Svadyaya, mean?",
@@ -269,7 +269,7 @@ var questionSets =
 			"Self-love",
 			"Contentment",
 			"Happiness"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the fifth Niyama, Isvara-pranidhana, mean?",
@@ -278,7 +278,7 @@ var questionSets =
 			"Love",
 			"Self-study",
 			"Concentration"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is Pranayama?",
@@ -287,7 +287,7 @@ var questionSets =
 			"Concentration",
 			"Meditation",
 			"Union of self with objects"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is Dhyana?",
@@ -296,7 +296,7 @@ var questionSets =
 			"Concentration",
 			"Self-study",
 			"Postures"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is Dharana?",
@@ -305,7 +305,7 @@ var questionSets =
 			"Turning inward",
 			"Meditation",
 			"Mindful Breathing"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is Asana?",
@@ -314,7 +314,7 @@ var questionSets =
 			"Meditation",
 			"A bad word",
 			"Non-violence"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is Samadhi?",
@@ -323,7 +323,7 @@ var questionSets =
 			"Turning inward",
 			"Meditation",
 			"A Japanese sword fighter"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is Pratyahara?",
@@ -332,7 +332,7 @@ var questionSets =
 			"Mindful Breathing ",
 			"Concentration",
 			"Self-love"
-		]
+		[
 	),
 	new QuestionSet (
 		"Why is Ahimsa the first Yama?",
@@ -341,7 +341,7 @@ var questionSets =
 			"Patanjali liked it the best.",
 			"Patanjali thought that it wasn't that important and wanted to get it out of the way.",
 			"Once you develop compassion you enter Samadhi. "
-		]
+		[
 	),
 	new QuestionSet (
 		"What are the two focus aspects of a spiritual practice?",
@@ -350,7 +350,7 @@ var questionSets =
 			"Dharma (observation of spiritual discipline) and Artha (creation of a balanced life)",
 			"Asmita (pride) and Raga (desire)",
 			"Moksa (liberation) and Kama (enjoyment of the fruits of one's labors)"
-		]
+		[
 	),
 	new QuestionSet (
 		"What are the five Kleshas?",
@@ -359,7 +359,7 @@ var questionSets =
 			"Dharma, Artha, Kama, Dvesa, Avidya",
 			"Asmita, Raga, Artha, Kama, Moksa",
 			"Abyasa, Vairagya, Artha, Kama, Asmita"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is a Klesha?",
@@ -368,7 +368,7 @@ var questionSets =
 			"There are four and they express yogic values and beliefs.",
 			"There are five and they are limbs of yoga.",
 			"There are four and they some up why we do yoga. "
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the first Klesha, Avidya, mean?",
@@ -377,7 +377,7 @@ var questionSets =
 			"Spiritual Bliss",
 			"Desire",
 			"Creation of a balanced life"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the second Klesha, Asmita, mean?",
@@ -386,7 +386,7 @@ var questionSets =
 			"Purity",
 			"Truthfulness",
 			"Fear of death"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the third Klesha, Raga, mean?",
@@ -395,7 +395,7 @@ var questionSets =
 			"Determination",
 			"Love",
 			"Theft"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does the fourth Klesha, Dvesa, mean?",
@@ -404,7 +404,7 @@ var questionSets =
 			"Attitude",
 			"Pride",
 			"Love of life"
-		]
+		[
 	),
 	new QuestionSet (
 		"What does Ganesha's trunk represent for a yogi?",
@@ -413,7 +413,7 @@ var questionSets =
 			"To toot our own horns.",
 			"To play in the water. ",
 			"To ride a elephant whenever possible. "
-		]
+		[
 	),
 	new QuestionSet (
 		"What is so important about Ganesha's big, floppy ears?",
@@ -422,7 +422,7 @@ var questionSets =
 			"He hears everything.",
 			"He can fly.",
 			"He doesn't need hearing aids. "
-		]
+		[
 	),
 	new QuestionSet (
 		"What do Ganesha's little eyes mean?",
@@ -431,7 +431,7 @@ var questionSets =
 			"He needs glasses.",
 			"That he can't see.",
 			"He loves us. "
-		]
+		[
 	),
 	new QuestionSet (
 		"What is the fifth and final Klesha and what does it mean?",
@@ -440,7 +440,7 @@ var questionSets =
 			"Raga (desire)",
 			"Asmita (pride)",
 			"Artha (creation of a balanced life) "
-		]
+		[
 	),
 	new QuestionSet (
 		"What are the four aims of life? (Purushartha)",
@@ -449,7 +449,7 @@ var questionSets =
 			"Aviday, Asmita, Artha, Kama",
 			"Abhyasa, Kama, Dharma, Artha",
 			"Kama, Dvesa, Abhinivesa, Dharma"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is the name of the root chakra?",
@@ -458,7 +458,7 @@ var questionSets =
 			"Manipura",
 			"Ajna",
 			"Moksa"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is the second chakra?",
@@ -467,7 +467,7 @@ var questionSets =
 			"Muladhara ",
 			"Manipura",
 			"Vishudda"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is the third chakra?",
@@ -476,7 +476,7 @@ var questionSets =
 			"Muladhara ",
 			"Ajna",
 			"Svadisthana"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is the fourth chakra?",
@@ -485,7 +485,7 @@ var questionSets =
 			"Ajna",
 			"Svadhisthana",
 			"Vishudda"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is the fifth chakra?",
@@ -494,7 +494,7 @@ var questionSets =
 			"Ajna",
 			"Anahata",
 			"Muladhara"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is the sixth chakra?",
@@ -503,7 +503,7 @@ var questionSets =
 			"Anahata",
 			"Sahasrara",
 			"Muladhara"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is the seventh chakra?",
@@ -512,7 +512,7 @@ var questionSets =
 			"Ajna",
 			"Vishudda",
 			"Muladhara"
-		]
+		[
 	),
 	new QuestionSet (
 		"What are the four main bones of the leg?",
@@ -521,7 +521,7 @@ var questionSets =
 			"Ulna, Radius, Femur, Tibia",
 			"Ilium, Radius, Fibula, Patella",
 			"Patella, Fibia, Tibula, Femus"
-		]
+		[
 	),
 	new QuestionSet (
 		"What is bramari breath?",
@@ -530,6 +530,6 @@ var questionSets =
 			"stinky",
 			"lions breath",
 			"reverse nostril upside down breath"
-		]
-	),
+		[
+	)
 ];
